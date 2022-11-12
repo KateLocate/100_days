@@ -3,9 +3,27 @@
 name: Telegram notification
 
 # Controls when the action will run. Triggers the workflow on pull request
-on:
+on: 
   pull_request:
-    branches: [ develop ]
+    types:
+      - assigned
+      - unassigned
+      - labeled
+      - unlabeled
+      - opened
+      - edited
+      - closed
+      - reopened
+      - synchronize
+      - converted_to_draft
+      - ready_for_review
+      - locked
+      - unlocked
+      - review_requested
+      - review_request_removed
+      - auto_merge_enabled
+      - auto_merge_disabled
+    
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -17,8 +35,11 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-
+      - uses: actions/checkout@v2 
+      
+      - name: Set env
+        run: echo "GITHUB_REF_RART=$(echo $GITHUB_REF | cut -c 6-)" >> $GITHUB_ENV
+        
       # Runs the telegram notify action to send a notification
       - name: Telegram Notify
         uses: appleboy/telegram-action@master
@@ -27,4 +48,4 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           format: markdown
           message: |
-            A new PR is raised [View all PR's](https://github.com/<user>/<repo>/pulls)
+            ${{ github.actor }}: ${{ github.event.action }} pull request. https://github.com/${{ github.repository }}/${{ env.GITHUB_REF_RART }}/
