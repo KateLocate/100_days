@@ -24,7 +24,7 @@ on:
       - auto_merge_enabled
       - auto_merge_disabled
 
-  pull_request_comment:
+  issue_comment:
     types:
       - submitted
 
@@ -55,4 +55,4 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           format: markdown
           message: |
-            ${{ github.actor }}: ${{ github.event.action }} {{ github.event_name }}. https://github.com/${{ github.repository }}/${{ env.GITHUB_REF_PART }}/
+            ${{ github.actor }}: ${{ github.event.action }} ${{ github.event_name }}. https://github.com/${{ github.repository }}/${{ env.GITHUB_REF_PART }}/
