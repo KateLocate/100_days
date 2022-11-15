@@ -8,31 +8,34 @@ class TipCalculator:
     ASK_NUMBER_OF_PEOPLE = 'How many people to split the bill?'
     TELL_THE_RESULT = 'Each person should pay: ${:.2f}'
     VALUE_ERROR_MESSAGE = 'What you entered is not a number.'
+    TIP_ERROR_MESSAGE = 'Please, choose the tip amount from the given options.'
+
+    def get_number(self, data_type, input_message, error_message, values=None):
+        try:
+            result = data_type(input(input_message))
+        except ValueError:
+            print(error_message)
+            result = self.get_number(data_type, input_message, error_message)
+        if values:
+            if result in values:
+                return result
+            else:
+                print(error_message)
+                self.get_number(data_type, input_message, error_message)
+        else:
+            return result
 
     def run_calculator(self):
         print(self.GREETING)
 
-        while True:
-            try:
-                bill = float(input(self.ASK_TOTAL_BILL))
-                tip_percent = int(input(self.ASK_TIP_PERCENT))
-            except ValueError:
-                print(self.VALUE_ERROR_MESSAGE)
-                continue
-            if tip_percent not in self.TIP_PERCENTS:
-                print('Please, choose the tip amount from the given options.')
-                continue
-            try:
-                num_of_people = int(input(self.ASK_NUMBER_OF_PEOPLE))
-            except ValueError:
-                print('What you entered is not a number.')
-                continue
+        bill = self.get_number(float, self.ASK_TOTAL_BILL, self.VALUE_ERROR_MESSAGE)
+        tip_percent = self.get_number(int, self.ASK_TIP_PERCENT, self.TIP_ERROR_MESSAGE)
+        num_of_people = self.get_number(int, self.ASK_NUMBER_OF_PEOPLE, self.VALUE_ERROR_MESSAGE)
 
-            bill_with_tip = bill + tip_percent * bill / 100
-            part_of_bill_divided = bill_with_tip / num_of_people
+        bill_with_tip = bill + tip_percent * bill / 100
+        part_of_bill_divided = bill_with_tip / num_of_people
 
-            print(self.TELL_THE_RESULT.format(part_of_bill_divided))
-            break
+        print(self.TELL_THE_RESULT.format(part_of_bill_divided))
 
 
 if __name__ == '__main__':
