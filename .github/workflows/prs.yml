@@ -1,4 +1,4 @@
-# This is a basic workflow to help you get started with Actions
+# Notifications on pull requests.
 
 name: Telegram notification
 
@@ -23,24 +23,31 @@ on:
       - review_request_removed
       - auto_merge_enabled
       - auto_merge_disabled
-    
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+  pull_request_comment:
+    types:
+      - submitted
+
+  pull_request_review:
+    types:
+      - submitted
+      - edited
+      - dismissed
+
+  pull_request_review_comment:
+    types:
+      - created
+
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2 
+      - uses: actions/checkout@v2
       
       - name: Set env
-        run: echo "GITHUB_REF_RART=$(echo $GITHUB_REF | cut -c 6-)" >> $GITHUB_ENV
+        run: echo "GITHUB_REF_PART=$(echo $GITHUB_REF | cut -c 6-)" >> $GITHUB_ENV
         
-      # Runs the telegram notify action to send a notification
       - name: Telegram Notify
         uses: appleboy/telegram-action@master
         with:
@@ -48,4 +55,4 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           format: markdown
           message: |
-            ${{ github.actor }}: ${{ github.event.action }} pull request. https://github.com/${{ github.repository }}/${{ env.GITHUB_REF_RART }}/
+            ${{ github.actor }}: ${{ github.event.action }} {{ github.event_name }}. https://github.com/${{ github.repository }}/${{ env.GITHUB_REF_PART }}/
