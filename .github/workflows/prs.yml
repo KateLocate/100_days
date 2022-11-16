@@ -35,7 +35,7 @@ on:
       - dismissed
 
 jobs:
-  build:
+  send_tg_message:
     runs-on: ubuntu-latest
 
     steps:
@@ -51,4 +51,4 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           format: markdown
           message: |
-            ${{ github.actor }} ${{ github.event.review.state || github.event.action }} ${{ github.event_name }}. https://github.com/${{ github.repository }}/${{ env.GITHUB_REF_PART }}/
+            ~ ${{ github.event_name }} ~ {{ github.actor }}: ${{ github.event.review.state || github.event.action }} . https://github.com/${{ github.repository }}/${{ env.GITHUB_REF_PART }}/
