@@ -10,7 +10,7 @@ SCENARIO = {
         'left': 'Yes, I will!',
         'left_pos': '0',
         'right': 'No, I won`t...',
-        'right_pos': '10',
+        'right_pos': '111',
     },
     '0': {
         'text': 'The man takes you to the road that will lead you to a tree with the hidden treasure and shows you '
@@ -22,10 +22,10 @@ SCENARIO = {
         'right': 'I choose right!',
         'right_pos': '01',
     },
-    '123': {
+    '111': {
         'text': 'You leave the town and continue your journey, but not this quest!',
-        'left': 'I choose left!',
-        'left_pos': None,
+        'left': None,
+        'left_pos': '10',
         'right': None,
         'right_pos': None,
     },
