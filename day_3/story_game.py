@@ -1,3 +1,4 @@
+import ascii_art as art
 from scenario import GREETING, SCENARIO
 
 
@@ -46,27 +47,34 @@ class Story:
         start_event = self.story.get('')
         current_event = start_event
         while current_event.left_event or current_event.right_event:
+            print(art.TOP_BORDER)
             print(current_event.text)
+            print(art.BOTTOM_BORDER)
             left = current_event.left
             right = current_event.right
             if right and left:
                 print(f'1:{current_event.left} \n2:{current_event.right}')
                 choice_phrase = 'Enter 1 or 2:'
+                print(art.TOP_BORDER)
                 choice = self.infinite_query(choice_phrase, ['1', '2'])
+                print(art.BOTTOM_BORDER)
                 if choice == '1':
                     current_event = current_event.left_event
                 elif choice == '2':
                     current_event = current_event.right_event
             elif current_event.right_event and current_event.left_event:
-                print('See some fat bugs here...')
+                print('See some bugs here, some fat ones...')
             elif current_event.right_event or current_event.left_event:
                 current_event = current_event.right_event or current_event.left_event
         else:
             print(current_event.text)
 
     def start_game(self):
+        print(art.CHEST)
+        print(art.START_AND_STOP)
         print(self.greeting)
         self.play()
+        print(art.START_AND_STOP)
 
 
 story = Story(SCENARIO, GREETING)
