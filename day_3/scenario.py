@@ -142,15 +142,15 @@ SCENARIO = {
         'right': None,
         'right_pos': None,
     },
-    '0011': {
+    '00101': {
         'text': 'When you come to a source of music and laughter, you see the enchanted harp, '
                 'playing songs and sounding different voices. There is a chest nearby, will you open it?',
         'left': 'Maybe there is loot? I`ll open it.',
-        'left_pos': '00110',
+        'left_pos': '001010',
         'right': 'No, I won`t.',
-        'right_pos': '00111',
+        'right_pos': '001011',
     },
-    '00110': {
+    '001010': {
         'text': 'You try opening the chest, but suddenly something tong-like comes out of it and grabs you. '
                 'You are a mimic`s prey. Sorry, the quest ends here...',
         'left': None,
@@ -158,7 +158,7 @@ SCENARIO = {
         'right': None,
         'right_pos': None,
     },
-    '00111': {
+    '001011': {
         'text': 'You sit in front of a harp and enjoy the enveloping song, it clouds your mind and feels so good. '
                 'You have nothing to worry about anymore, you go back to the town and forget about the tree treasure.',
         'left': None,
