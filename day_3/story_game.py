@@ -92,10 +92,7 @@ class Story:
                 choice = self.text_with_borders_printing(
                     art.TOP_BORDER, art.BOTTOM_BORDER, action=self.infinite_query, action_args=(choice_phrase, choices)
                 )
-                if choice == left:
-                    current_event = left_event
-                elif choice == right:
-                    current_event = right_event
+                current_event = left_event if choice == left else right_event
             elif right_event and left_event:
                 print('See some bugs here, some fat ones...')
             elif right_event or left_event:
