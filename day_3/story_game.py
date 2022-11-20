@@ -21,7 +21,9 @@ class Story:
         self.story = {}
 
     def make_story(self):
+        all_positions = {''}
         for position, details in self.story_dict.items():
+            all_positions.update([details['left_pos'], details['right_pos']])
             node = Node(
                 position=position,
                 left_pos=details['left_pos'],
@@ -31,17 +33,20 @@ class Story:
                 text=details['text'],
             )
             self.story[position] = node
-        event_codes = self.story.keys()
+        event_codes = set(self.story.keys())
+        event_codes.add(None)
+        if event_codes != all_positions:
+            raise Exception(f'Some events not present in the scenario:{all_positions.difference(set(event_codes))}.')
         for event_code, event in self.story.items():
-            if event.left_event in event_codes:
+            if event.left_event:
                 event.left_event = self.story[event.left_event]
-            if event.right_event in event_codes:
+            if event.right_event:
                 event.right_event = self.story[event.right_event]
 
     @staticmethod
-    def infinite_query(phrase, valid_answer):
+    def infinite_query(phrase: str, valid_answers: tuple):
         answer = None
-        while answer not in valid_answer:
+        while answer not in valid_answers:
             answer = input(phrase)
         return answer
 
