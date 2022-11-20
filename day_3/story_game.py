@@ -20,6 +20,9 @@ class Story:
         self.greeting = greeting
         self.story = {}
 
+        self.make_story()
+        self.start_game()
+
     def make_story(self):
         all_positions = {''}
         for position, details in self.story_dict.items():
@@ -111,6 +114,5 @@ class Story:
         self.play()
 
 
-story = Story(SCENARIO, GREETING)
-story.make_story()
-story.start_game()
+if __name__ == '__main__':
+    game = Story(SCENARIO, GREETING)
