@@ -87,16 +87,18 @@ class Story:
         start_event = self.story.get('')
         current_event = start_event
 
+        left, right = '1', '2'
+        choices = [left, right]
+        choice_phrase = f'Enter {left} or {right}:'
+
         while current_event.left_event or current_event.right_event:
             self.text_with_borders_printing(art.TOP_BORDER, art.BOTTOM_BORDER, text=current_event.text)
 
-            left, left_text, left_event = '1', current_event.left, current_event.left_event
-            right, right_text, right_event = '2', current_event.right, current_event.right_event
+            left_text, left_event = current_event.left, current_event.left_event
+            right_text, right_event = current_event.right, current_event.right_event
 
             if right_text and left_text:
                 print(f'{left}:{current_event.left} \n{right}:{current_event.right}')
-                choice_phrase = f'Enter {left} or {right}:'
-                choices = [left, right]
                 choice = self.text_with_borders_printing(
                     art.TOP_BORDER, art.BOTTOM_BORDER, action=self.infinite_query, action_args=(choice_phrase, choices)
                 )
