@@ -93,7 +93,7 @@ class Story:
             new_string.rstrip(space)
         return new_string if new_string else string
 
-    def text_with_borders_printing(self, top_border: str, bottom_border: str,
+    def text_with_borders_printing(self, top_border: str = art.TOP_BORDER, bottom_border: str = art.BOTTOM_BORDER,
                                    text: str = '', action: Callable = None, action_args: tuple = ()):
         result = None
         brd_length = len(top_border.split('\n')[0])
@@ -115,7 +115,7 @@ class Story:
         choice_phrase = f'Enter {left} or {right}:'
 
         while current_event.left_event or current_event.right_event:
-            self.text_with_borders_printing(art.TOP_BORDER, art.BOTTOM_BORDER, text=current_event.text)
+            self.text_with_borders_printing(text=current_event.text)
 
             left_text, left_event = current_event.left, current_event.left_event
             right_text, right_event = current_event.right, current_event.right_event
@@ -123,7 +123,7 @@ class Story:
             if right_text and left_text:
                 print(f'{left}:{current_event.left} \n{right}:{current_event.right}')
                 choice = self.text_with_borders_printing(
-                    art.TOP_BORDER, art.BOTTOM_BORDER, action=self.infinite_query, action_args=(choice_phrase, choices)
+                    action=self.infinite_query, action_args=(choice_phrase, choices)
                 )
                 current_event = left_event if choice == left else right_event
             elif right_event and left_event:
