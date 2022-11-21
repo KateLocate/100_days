@@ -70,7 +70,7 @@ class Story:
             print(current_event.text)
 
     def start_game(self):
-        print(art.CHEST)
+        print(art.START_ART)
         print(art.START_AND_STOP)
         print(self.greeting)
         self.play()
