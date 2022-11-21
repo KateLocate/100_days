@@ -70,7 +70,7 @@ SCENARIO = {
         'left': 'Yes, it seems friendly, why not.',
         'left_pos': '010',
         'right': 'It is a distraction, I won`t go.',
-        'right_pos': '0.1.1',
+        'right_pos': '011',
     },
     '0000': {
         'text': 'You both drown, and it is the end of your story...',
