@@ -24,9 +24,9 @@ class Story:
         self.start_game()
 
     def make_story(self):
-        all_positions = {''}
+        left_and_right_positions = {''}
         for position, details in self.story_dict.items():
-            all_positions.update([details['left_pos'], details['right_pos']])
+            left_and_right_positions.update([details['left_pos'], details['right_pos']])
             node = Node(
                 position=position,
                 left_pos=details['left_pos'],
@@ -36,10 +36,13 @@ class Story:
                 text=details['text'],
             )
             self.story[position] = node
-        event_codes = set(self.story.keys())
-        event_codes.add(None)
-        if event_codes != all_positions:
-            raise Exception(f'Some events not present in the scenario:{all_positions.difference(set(event_codes))}.')
+        story_event_keys = set(self.story.keys())
+        story_event_keys.add(None)
+        if story_event_keys != left_and_right_positions:
+            raise Exception(
+                f'Some events are not present in the scenario: '
+                f'{left_and_right_positions.difference(set(story_event_keys))}.'
+            )
         for event_code, event in self.story.items():
             if event.left_event:
                 event.left_event = self.story[event.left_event]
