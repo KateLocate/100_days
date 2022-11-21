@@ -15,7 +15,27 @@ class Node:
 
 
 class Story:
+    """Class for text quests realization using structured story scenario."""
+
     def __init__(self, story_dict: dict, greeting: str = ''):
+        """
+        The __init__ method requires a `story_dict` dict object e.g:
+        { 'event_code': {
+            'text': 'The end',
+            'left': None,
+            'left_pos': None,
+            'right': None,
+            'right_pos': None,
+            },
+        }
+        Restrictions:
+            - the story scenario is a constant value `SCENARIO` from `scenario.py`
+            - `event_code` == '' is a start of a story
+            - `event_code` is a string or a number with unique value
+            - the keys `text`, `left`, `left_pos`, `right`, `right_pos` must not be renamed
+            - the values of the keys `left`, `left_pos`, `right`, `right_pos` may be None, number or string
+            - `ascii_art.py` must contain constant values: `START_AND_STOP`, `TOP_BORDER`, `BOTTOM_BORDER`, `START_ART`
+        """
         self.story_dict = story_dict
         self.greeting = greeting
         self.story = {}
